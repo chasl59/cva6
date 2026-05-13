@@ -155,7 +155,8 @@ csrrst:
     csrr x14, 0x343
 
     #MCYCLE read value
-    csrr x14, 0xb00
+    # Removed this because the counter can't be stopped on certain targets, and it won't match 
+    # Spike because Spike is not cycle-accurate.
 
     #MHPMCOUNTER28 read value
     csrr x14, 0xb1c
@@ -248,7 +249,8 @@ csrrst:
     csrr x14, 0x32a
 
     #MINSTRET read value
-    csrr x14, 0xb02
+    # Removed this because the counter can't be stopped on certain targets, and it won't match 
+    # Spike because Spike is not cycle-accurate.
 
     #MHPMCOUNTERH14 read value
     csrr x14, 0xb8e

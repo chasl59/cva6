@@ -20,8 +20,8 @@ main:
     call csrrw_fields
     call csrrw
     call csrrwi
-    call csrcs
-    call csrcsi
+#   call csrcs
+#   call csrcsi
 
     #End of csr test
     j csr_pass

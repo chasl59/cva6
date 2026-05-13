@@ -924,11 +924,17 @@ csrcs:
 
     ##########################
     #PMPCFG0 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'hd} 
+    # The usual values:  '{'h1f, 'h0, 'h15, 'ha, 'hd} cause failures for PMPCFG registers.
+    # Some of these values attempt to set bits 3 or 4 in the PMPCFG address mode field, but
+    # the cva6 targets do not support certain address modes.  The Spike simulator
+    # can not be configured the same way, so that creates mismatches when the PMPCFG 
+    # register values are compared.  Don't set bit 4.  Instead, use different values:  
+    # '{'h0f, 'h0, 'h05, 'ha, 'hd}
     ##########################
-    #PMPCFG0 Write clear/set value 0x1f
+    #PMPCFG0 Write clear/set value 0x0f
     li x3, 0xffffffe0
     csrrc x14, 0x3a0, x3
-    li x3, 0x1f
+    li x3, 0x0f
     csrrs x14, 0x3a0, x3
 
     #PMPCFG0 read value
@@ -943,10 +949,10 @@ csrcs:
     #PMPCFG0 read value
     csrr x14, 0x3a0
 
-    #PMPCFG0 Write clear/set value 0x15
+    #PMPCFG0 Write clear/set value 0x05
     li x3, 0xffffffea
     csrrc x14, 0x3a0, x3
-    li x3, 0x15
+    li x3, 0x05
     csrrs x14, 0x3a0, x3
 
     #PMPCFG0 read value
@@ -1259,12 +1265,13 @@ csrcs:
     csrr x14, 0x338
 
     ##########################
-    #PMPCFG3 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h0} 
+    #PMPCFG3 testing W/R values '{'h0f, 'h0, 'h05, 'ha, 'h0} 
+    # Refer to PMPCFG0 for details on the value changes
     ##########################
-    #PMPCFG3 Write clear/set value 0x1f
+    #PMPCFG3 Write clear/set value 0x0f
     li x3, 0xffffffe0
     csrrc x14, 0x3a3, x3
-    li x3, 0x1f
+    li x3, 0x0f
     csrrs x14, 0x3a3, x3
 
     #PMPCFG3 read value
@@ -1279,10 +1286,10 @@ csrcs:
     #PMPCFG3 read value
     csrr x14, 0x3a3
 
-    #PMPCFG3 Write clear/set value 0x15
+    #PMPCFG3 Write clear/set value 0x05
     li x3, 0xffffffea
     csrrc x14, 0x3a3, x3
-    li x3, 0x15
+    li x3, 0x05
     csrrs x14, 0x3a3, x3
 
     #PMPCFG3 read value
@@ -2318,51 +2325,10 @@ csrcs:
 
     ##########################
     #MCYCLE testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'ha} 
+    # This MCYCLE section has been deleted because Spike is not cycle-accurate.
+    # The counter can not be stopped in some targets (e.g. cv32a65x) and 
+    # a comparison of MCYCLE values between Spike and any cycle accurate simulator will fail.
     ##########################
-    #MCYCLE Write clear/set value 0x1f
-    li x3, 0xffffffe0
-    csrrc x14, 0xb00, x3
-    li x3, 0x1f
-    csrrs x14, 0xb00, x3
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0x0
-    li x3, 0xffffffff
-    csrrc x14, 0xb00, x3
-    li x3, 0x0
-    csrrs x14, 0xb00, x3
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0x15
-    li x3, 0xffffffea
-    csrrc x14, 0xb00, x3
-    li x3, 0x15
-    csrrs x14, 0xb00, x3
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0xa
-    li x3, 0xfffffff5
-    csrrc x14, 0xb00, x3
-    li x3, 0xa
-    csrrs x14, 0xb00, x3
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0xa
-    li x3, 0xfffffff5
-    csrrc x14, 0xb00, x3
-    li x3, 0xa
-    csrrs x14, 0xb00, x3
-
-    #MCYCLE read value
-    csrr x14, 0xb00
 
     #CYCLEH WR skipped since it's a RO register
 
@@ -2756,51 +2722,8 @@ csrcs:
 
     ##########################
     #MINSTRETH testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h7} 
+    # Refer to MCYCLE in this file for the reason this section was removed.
     ##########################
-    #MINSTRETH Write clear/set value 0x1f
-    li x3, 0xffffffe0
-    csrrc x14, 0xb82, x3
-    li x3, 0x1f
-    csrrs x14, 0xb82, x3
-
-    #MINSTRETH read value
-    csrr x14, 0xb82
-
-    #MINSTRETH Write clear/set value 0x0
-    li x3, 0xffffffff
-    csrrc x14, 0xb82, x3
-    li x3, 0x0
-    csrrs x14, 0xb82, x3
-
-    #MINSTRETH read value
-    csrr x14, 0xb82
-
-    #MINSTRETH Write clear/set value 0x15
-    li x3, 0xffffffea
-    csrrc x14, 0xb82, x3
-    li x3, 0x15
-    csrrs x14, 0xb82, x3
-
-    #MINSTRETH read value
-    csrr x14, 0xb82
-
-    #MINSTRETH Write clear/set value 0xa
-    li x3, 0xfffffff5
-    csrrc x14, 0xb82, x3
-    li x3, 0xa
-    csrrs x14, 0xb82, x3
-
-    #MINSTRETH read value
-    csrr x14, 0xb82
-
-    #MINSTRETH Write clear/set value 0x7
-    li x3, 0xfffffff8
-    csrrc x14, 0xb82, x3
-    li x3, 0x7
-    csrrs x14, 0xb82, x3
-
-    #MINSTRETH read value
-    csrr x14, 0xb82
 
     ##########################
     #MHPMCOUNTER16 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h1d} 
@@ -3337,12 +3260,13 @@ csrcs:
     csrr x14, 0x3ba
 
     ##########################
-    #PMPCFG2 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'hc} 
+    #PMPCFG2 testing W/R values '{'h0f, 'h0, 'h05, 'ha, 'hc} 
+    # Refer to PMPCFG0 for details on the value changes
     ##########################
-    #PMPCFG2 Write clear/set value 0x1f
+    #PMPCFG2 Write clear/set value 0x0f
     li x3, 0xffffffe0
     csrrc x14, 0x3a2, x3
-    li x3, 0x1f
+    li x3, 0x0f
     csrrs x14, 0x3a2, x3
 
     #PMPCFG2 read value
@@ -3357,10 +3281,10 @@ csrcs:
     #PMPCFG2 read value
     csrr x14, 0x3a2
 
-    #PMPCFG2 Write clear/set value 0x15
+    #PMPCFG2 Write clear/set value 0x05
     li x3, 0xffffffea
     csrrc x14, 0x3a2, x3
-    li x3, 0x15
+    li x3, 0x05
     csrrs x14, 0x3a2, x3
 
     #PMPCFG2 read value
@@ -3961,12 +3885,13 @@ csrcs:
     csrr x14, 0xb9a
 
     ##########################
-    #PMPCFG1 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h2} 
+    #PMPCFG1 testing W/R values '{'h0f, 'h0, 'h05, 'ha, 'h2} 
+    # Refer to PMPCFG0 for details on the value changes
     ##########################
-    #PMPCFG1 Write clear/set value 0x1f
+    #PMPCFG1 Write clear/set value 0x0f
     li x3, 0xffffffe0
     csrrc x14, 0x3a1, x3
-    li x3, 0x1f
+    li x3, 0x0f
     csrrs x14, 0x3a1, x3
 
     #PMPCFG1 read value
@@ -3981,10 +3906,10 @@ csrcs:
     #PMPCFG1 read value
     csrr x14, 0x3a1
 
-    #PMPCFG1 Write clear/set value 0x15
+    #PMPCFG1 Write clear/set value 0x05
     li x3, 0xffffffea
     csrrc x14, 0x3a1, x3
-    li x3, 0x15
+    li x3, 0x05
     csrrs x14, 0x3a1, x3
 
     #PMPCFG1 read value
@@ -4010,51 +3935,8 @@ csrcs:
 
     ##########################
     #MCYCLEH testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'hd} 
+    # Refer to MCYCLE in this file for the reason this section was removed. 
     ##########################
-    #MCYCLEH Write clear/set value 0x1f
-    li x3, 0xffffffe0
-    csrrc x14, 0xb80, x3
-    li x3, 0x1f
-    csrrs x14, 0xb80, x3
-
-    #MCYCLEH read value
-    csrr x14, 0xb80
-
-    #MCYCLEH Write clear/set value 0x0
-    li x3, 0xffffffff
-    csrrc x14, 0xb80, x3
-    li x3, 0x0
-    csrrs x14, 0xb80, x3
-
-    #MCYCLEH read value
-    csrr x14, 0xb80
-
-    #MCYCLEH Write clear/set value 0x15
-    li x3, 0xffffffea
-    csrrc x14, 0xb80, x3
-    li x3, 0x15
-    csrrs x14, 0xb80, x3
-
-    #MCYCLEH read value
-    csrr x14, 0xb80
-
-    #MCYCLEH Write clear/set value 0xa
-    li x3, 0xfffffff5
-    csrrc x14, 0xb80, x3
-    li x3, 0xa
-    csrrs x14, 0xb80, x3
-
-    #MCYCLEH read value
-    csrr x14, 0xb80
-
-    #MCYCLEH Write clear/set value 0xd
-    li x3, 0xfffffff2
-    csrrc x14, 0xb80, x3
-    li x3, 0xd
-    csrrs x14, 0xb80, x3
-
-    #MCYCLEH read value
-    csrr x14, 0xb80
 
     ##########################
     #MIE testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h15} 
@@ -5746,51 +5628,8 @@ csrcs:
 
     ##########################
     #MINSTRET testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h1d} 
+    # Refer to MCYCLE in this file for the reason this section was removed.
     ##########################
-    #MINSTRET Write clear/set value 0x1f
-    li x3, 0xffffffe0
-    csrrc x14, 0xb02, x3
-    li x3, 0x1f
-    csrrs x14, 0xb02, x3
-
-    #MINSTRET read value
-    csrr x14, 0xb02
-
-    #MINSTRET Write clear/set value 0x0
-    li x3, 0xffffffff
-    csrrc x14, 0xb02, x3
-    li x3, 0x0
-    csrrs x14, 0xb02, x3
-
-    #MINSTRET read value
-    csrr x14, 0xb02
-
-    #MINSTRET Write clear/set value 0x15
-    li x3, 0xffffffea
-    csrrc x14, 0xb02, x3
-    li x3, 0x15
-    csrrs x14, 0xb02, x3
-
-    #MINSTRET read value
-    csrr x14, 0xb02
-
-    #MINSTRET Write clear/set value 0xa
-    li x3, 0xfffffff5
-    csrrc x14, 0xb02, x3
-    li x3, 0xa
-    csrrs x14, 0xb02, x3
-
-    #MINSTRET read value
-    csrr x14, 0xb02
-
-    #MINSTRET Write clear/set value 0x1d
-    li x3, 0xffffffe2
-    csrrc x14, 0xb02, x3
-    li x3, 0x1d
-    csrrs x14, 0xb02, x3
-
-    #MINSTRET read value
-    csrr x14, 0xb02
 
     ##########################
     #MHPMEVENT29 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h1b} 

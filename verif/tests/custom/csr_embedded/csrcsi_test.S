@@ -3676,41 +3676,10 @@ csrcsi:
 
     ##########################
     #MCYCLE testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h18} 
+    # This MCYCLE section has been deleted because Spike is not cycle-accurate.
+    # The counter can not be stopped in some targets (e.g. cv32a65x) and 
+    # a comparison of MCYCLE values between Spike and any cycle accurate simulator will fail.
     ##########################
-    #MCYCLE Write clear/set value 0x1f
-    csrrci x14, 0xb00, 0x0
-    csrrsi x14, 0xb00, 0x1f
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0x0
-    csrrci x14, 0xb00, 0x1f
-    csrrsi x14, 0xb00, 0x0
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0x15
-    csrrci x14, 0xb00, 0xa
-    csrrsi x14, 0xb00, 0x15
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0xa
-    csrrci x14, 0xb00, 0x15
-    csrrsi x14, 0xb00, 0xa
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write clear/set value 0x18
-    csrrci x14, 0xb00, 0x7
-    csrrsi x14, 0xb00, 0x18
-
-    #MCYCLE read value
-    csrr x14, 0xb00
 
     ##########################
     #MHPMCOUNTER8 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h12} 

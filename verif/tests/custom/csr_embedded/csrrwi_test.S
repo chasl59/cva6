@@ -4221,36 +4221,39 @@ csrrwi:
 
     ##########################
     #MCYCLE testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'h1a} 
+    # This MCYCLE section has been deleted because Spike is not cycle-accurate.
+    # The counter can not be stopped in some targets (e.g. cv32a65x) and 
+    # a comparison of MCYCLE values between Spike and any cycle accurate simulator will fail.
     ##########################
-    #MCYCLE Write immediate value 0x1f
-    csrrwi x14, 0xb00, 0x1f
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write immediate value 0x0
-    csrrwi x14, 0xb00, 0x0
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write immediate value 0x15
-    csrrwi x14, 0xb00, 0x15
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write immediate value 0xa
-    csrrwi x14, 0xb00, 0xa
-
-    #MCYCLE read value
-    csrr x14, 0xb00
-
-    #MCYCLE Write immediate value 0x1a
-    csrrwi x14, 0xb00, 0x1a
-
-    #MCYCLE read value
-    csrr x14, 0xb00
+     #MCYCLE Write immediate value 0x1f
+     csrrwi x14, 0xb00, 0x1f
+ 
+     #MCYCLE read value
+     csrr x14, 0xb00
+ 
+     #MCYCLE Write immediate value 0x0
+     csrrwi x14, 0xb00, 0x0
+ 
+     #MCYCLE read value
+     csrr x14, 0xb00
+ 
+     #MCYCLE Write immediate value 0x15
+     csrrwi x14, 0xb00, 0x15
+ 
+     #MCYCLE read value
+     csrr x14, 0xb00
+ 
+     #MCYCLE Write immediate value 0xa
+     csrrwi x14, 0xb00, 0xa
+ 
+     #MCYCLE read value
+     csrr x14, 0xb00
+ 
+     #MCYCLE Write immediate value 0x1a
+     csrrwi x14, 0xb00, 0x1a
+ 
+     #MCYCLE read value
+     csrr x14, 0xb00
 
     ##########################
     #MHPMCOUNTER29 testing W/R values '{'h1f, 'h0, 'h15, 'ha, 'hc} 

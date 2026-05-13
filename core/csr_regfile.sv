@@ -990,12 +990,14 @@ module csr_regfile
     if (!(CVA6Cfg.DebugEn && debug_mode_q)) begin
       // increase instruction retired counter
       for (int i = 0; i < CVA6Cfg.NrCommitPorts; i++) begin
-        if (commit_ack_i[i] && !ex_i.valid && (!CVA6Cfg.PerfCounterEn || (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[2])))
+//      if (commit_ack_i[i] && !ex_i.valid && (!CVA6Cfg.PerfCounterEn || (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[2])))
+        if (commit_ack_i[i] && !ex_i.valid && (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[2]))
           instret++;
       end
       instret_d = instret;
       // increment the cycle count
-      if (!CVA6Cfg.PerfCounterEn || (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[0]))
+//    if (!CVA6Cfg.PerfCounterEn || (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[0]))
+      if (CVA6Cfg.PerfCounterEn && !mcountinhibit_q[0])
         cycle_d = cycle_q + 1'b1;
       else cycle_d = cycle_q;
     end
